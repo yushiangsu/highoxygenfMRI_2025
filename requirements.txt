@@ -1,0 +1,17 @@
+numpy>=1.26.4
+pandas>=2.2.3
+scipy>=1.15.1
+scikit-learn>=1.6.1
+neurokit2>=0.2.7
+nilearn>=0.11.1
+nipype>=1.8.5
+nibabel>=5.2.0
+pydicom>=2.4.4
+nitime>=0.11
+nimare>=0.3.0
+neuromaps>=0.0.5
+brainspace>=0.1.10
+surfplot>=0.2.0
+seaborn>=0.12.2
+matplotlib>=3.8.0
+cmcrameri>=0.0.0

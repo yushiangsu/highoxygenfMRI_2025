@@ -1,0 +1,46 @@
+# 
+# Please open NBS GUI under MATLAB and specify inputs as followed
+#
+
+# Statistical Model
+Design Matrix: pairedt_des.mat
+Contrast: pairedt_con.mat
+Statistical Test: 3.433
+Threshold: 't-test'
+
+# Data
+Connectivity Matrices: p2p1corr.mat or p3p1corr.mat or p4p1corr.mat
+Node Coordinates (MNI): roi_goc.txt
+Novel Labels [opt]: roi_label.txt
+
+# Advanced Settings
+Exchange Blocks [opt]: pairedt_excblk.mat
+Permutations: 10000
+Significance: 0.05
+Method: 'Network-Based Statistic (NBS)'
+Component Size: 'Extent'
+
+# 
+# Please output results as `p2p1_th3433.mat` or `p3p1_th3433.mat` 
+# or `p4p1_th3433.mat`. Then use the following code to get numbers
+# from the mat file and save to txt files.
+#
+
+``` matlab 
+comp_list = {'p2p1', 'p3p1', 'p4p1'};
+
+for i = 1:length(comp_list)
+    load(sprintf("%s_th3433.mat", comp_list{i}));
+    if isempty(nbs.NBS.con_mat)
+        con_mat = zeros(100);
+    else
+        con_mat = full(nbs.NBS.con_mat{1});
+        con_mat = tril(con_mat.', 1) + triu(con_mat);
+    end
+    writematrix(con_mat, sprintf("%s_conmat.txt", comp_list{i}));
+    writematrix(nbs.NBS.test_stat, sprintf("%s_constat.txt", comp_list{i}));
+end
+
+# 
+# See next file for plotting results with python 
+#
